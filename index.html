@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Palmjoy Shop</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #001B5F;
+      color: white;
+      padding: 1em;
+      text-align: center;
+    }
+    .product-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+      justify-content: center;
+    }
+    .product {
+      border: 2px solid #001B5F;
+      border-radius: 10px;
+      padding: 15px;
+      width: 200px;
+      text-align: center;
+      background-color: #f4f4f4;
+    }
+    .product img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .product button {
+      background-color: #6BA920;
+      border: none;
+      padding: 10px;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+    .product button:hover {
+      background-color: #5a911b;
+    }
+    #cart {
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 300px;
+      height: 100vh;
+      background-color: #ffffff;
+      border-left: 3px solid #001B5F;
+      padding: 20px;
+      overflow-y: auto;
+      z-index: 999;
+    }
+    #cart h2 {
+      color: #001B5F;
+    }
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+    }
+    .cart-item img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      margin-right: 10px;
+    }
+    .remove-btn {
+      background-color: #001B5F;
+      color: white;
+      border: none;
+      padding: 5px;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+    .remove-btn:hover {
+      background-color: #6BA920;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Palmjoy Products</h1>
+  </header>
+
+  <section class="product-list">
+    <div class="product">
+      <img src="https://via.placeholder.com/200x200?text=Diapers+XXL" alt="ZURAPHEN Adult Diapers XXL">
+      <h3>ZURAPHEN Adult Diapers XXL</h3>
+      <p>Ksh 800</p>
+      <button onclick="addToCart('ZURAPHEN Adult Diapers XXL', 800, 'https://via.placeholder.com/50?text=XXL')">Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/200x200?text=Underwear+L" alt="ZURAPHEN Protective Underwear L">
+      <h3>ZURAPHEN Protective Underwear L</h3>
+      <p>Ksh 750</p>
+      <button onclick="addToCart('ZURAPHEN Protective Underwear L', 750, 'https://via.placeholder.com/50?text=L')">Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/200x200?text=Menstrual+Pants" alt="PalmLady Menstrual Pants">
+      <h3>PalmLady Menstrual Pants</h3>
+      <p>Ksh 150</p>
+      <button onclick="addToCart('PalmLady Menstrual Pants', 150, 'https://via.placeholder.com/50?text=Pads')">Add to Cart</button>
+    </div>
+  </section>
+
+  <div id="cart">
+    <h2>🛒 Cart</h2>
+    <div id="cart-items"></div>
+  </div>
+
+  <script>
+    function addToCart(name, price, image) {
+      const cartContainer = document.getElementById("cart-items");
+
+      const itemDiv = document.createElement("div");
+      itemDiv.className = "cart-item";
+
+      const img = document.createElement("img");
+      img.src = image;
+      img.alt = name;
+
+      const infoDiv = document.createElement("div");
+      infoDiv.innerHTML = `<strong>${name}</strong><br>Ksh ${price}`;
+
+      const removeBtn = document.createElement("button");
+      removeBtn.innerText = "Remove";
+      removeBtn.className = "remove-btn";
+      removeBtn.onclick = () => {
+        cartContainer.removeChild(itemDiv);
+      };
+
+      itemDiv.appendChild(img);
+      itemDiv.appendChild(infoDiv);
+      itemDiv.appendChild(removeBtn);
+
+      cartContainer.appendChild(itemDiv);
+    }
+  </script>
+</body>
+</html>
